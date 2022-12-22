@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('to');
             $table->string('status')->default('Active');
             $table->foreignUuid('user_id')->constrained('users')->index();
+            $table->foreignUuid('driver_id')->constrained('users');
             $table->timestamps();
         });
     }

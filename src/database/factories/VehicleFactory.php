@@ -20,7 +20,7 @@ class VehicleFactory extends Factory
             'plate' => $this->faker->randomDigit(6),
             'capacity' => $this->faker->randomNumber(),
             'color' => $this->faker->safeHexColor(),
-            'user_id' => User::factory(),
+            'driver_id' => User::factory(),
         ];
     }
 }

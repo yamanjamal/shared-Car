@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('plate');
             $table->string('capacity');
             $table->string('color');
-            $table->foreignUuid('user_id')->constrained('users');
+            $table->foreignUuid('driver_id')->constrained('users');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class TripFactory extends Factory
             'to' => now()->addHours(rand(5, 10)),
             'status' => $this->faker->randomElement(TripStatus::cases()),
             'user_id' => User::factory(),
+            'driver_id' => User::factory(),
         ];
     }
 }
