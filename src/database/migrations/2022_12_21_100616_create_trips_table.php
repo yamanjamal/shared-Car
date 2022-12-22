@@ -12,9 +12,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('from');
             $table->string('to');
-            $table->string('status')->default('Active');
-            $table->foreignUuid('user_id')->constrained('users')->index();
-            $table->foreignUuid('driver_id')->constrained('users');
+            $table->string('status')->default('none');
+            $table->foreignUuid('driver_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignUuid('vehicle_id')->constrained('vehicles')->cascadeOnDelete();
             $table->timestamps();
         });
     }

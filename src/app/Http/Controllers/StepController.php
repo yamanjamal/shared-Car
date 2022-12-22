@@ -2,64 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\QueryPipelines\StepPipeline\StepPipeline;
 use App\Http\Requests\StoreStepRequest;
 use App\Http\Requests\UpdateStepRequest;
+use App\Http\Resources\StepResource;
 use App\Models\Step;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class StepController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request): StepResource
     {
-        //
+        $steps = Step::paginate($request->get('page', 10));
+
+        return StepResource::collection($steps);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreStepRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreStepRequest $request)
     {
-        //
+        $step = Step::create($request->validated());
+        return response()->json(new StepResource($step),201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Step  $step
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Step $step)
+    public function show(Step $step): StepResource
     {
-        //
+        return new StepResource(resource: $step);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateStepRequest  $request
-     * @param  \App\Models\Step  $step
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateStepRequest $request, Step $step)
+    public function update(UpdateStepRequest $request, Step $step): StepResource
     {
-        //
+        $step->update($request->validated());
+        return new StepResource(resource: $step);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Step  $step
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Step $step)
+    public function destroy(Step $step): Response
     {
-        //
+        $step->delete();
+        return response()->noContent();
     }
 }

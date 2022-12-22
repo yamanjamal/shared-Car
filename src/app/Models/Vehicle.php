@@ -23,5 +23,4 @@ class Vehicle extends Model
     {
         return $this->hasMany(Trip::class);
     }
-
 }

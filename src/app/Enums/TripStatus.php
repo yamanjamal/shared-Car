@@ -19,7 +19,7 @@ enum TripStatus: string
 
     public function toLabel(): string
     {
-        return __('gamehub.' . $this->name);
+        return __($this->name);
     }
 
     public function is(TripStatus $tripStatus): bool

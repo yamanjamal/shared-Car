@@ -36,12 +36,12 @@ class User extends Authenticatable
 
     public function vehicle(): HasOne
     {
-        return $this->hasOne(Vehicle::class, 'id');
+        return $this->hasOne(Vehicle::class);
     }
 
     public function trips(): HasMany
     {
-        return $this->hasMany(Trip::class);
+        return $this->hasMany(Trip_user::class);
     }
 
     public function fullName(): Attribute

@@ -31,7 +31,7 @@ class Trip extends Model
 
     public function users(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Trip_user::class);
     }
 
     public function steps(): HasMany

@@ -2,64 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\QueryPipelines\VehiclePipeline\VehiclePipeline;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
+use App\Http\Resources\VehicleResource;
 use App\Models\Vehicle;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class VehicleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $trip = VehiclePipeline::make(
+            builder: Vehicle::query(),
+            request: $request,
+        )->paginate($request->get('page', 10));
+
+        return VehicleResource::collection($trip);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreVehicleRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreVehicleRequest $request)
     {
-        //
+        $vehicle = Vehicle::create($request->validated());
+        return response()->json(new VehicleResource($vehicle),201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Vehicle $vehicle)
+    public function show(Vehicle $vehicle):VehicleResource
     {
-        //
+        return new VehicleResource(resource: $vehicle);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateVehicleRequest  $request
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
+    public function update(UpdateVehicleRequest $request, Vehicle $vehicle):VehicleResource
     {
-        //
+        $vehicle->update($request->validated());
+        return new VehicleResource(resource: $vehicle);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Vehicle $vehicle)
+    public function destroy(Vehicle $vehicle): Response
     {
-        //
+        $vehicle->delete();
+        return response()->noContent();
     }
 }

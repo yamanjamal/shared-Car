@@ -12,7 +12,7 @@ class TripResource extends JsonResource
             'id' => $this->whenNotNull($this->id),
             'from' => $this->whenNotNull($this->from),
             'to' => $this->whenNotNull($this->to),
-            'status' => $this->status->toLabel(),
+            'status' => $this->status ? $this->status->toLabel() : '',
             'driver' => new UserResource($this->whenLoaded('driver')),
             'vehicle' => new VehicleResource($this->whenLoaded('vehicle')),
             'users' => UserResource::collection($this->whenLoaded('users')),

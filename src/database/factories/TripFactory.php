@@ -4,21 +4,19 @@ namespace Database\Factories;
 
 use App\Enums\TripStatus;
 use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Trip>
- */
 class TripFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
         return [
-            'from' => now()->addHours(rand(1, 5)),
-            'to' => now()->addHours(rand(5, 10)),
+            'from' => $this->faker->city(),
+            'to' => $this->faker->city(),
             'status' => $this->faker->randomElement(TripStatus::cases()),
-            'user_id' => User::factory(),
             'driver_id' => User::factory(),
+            'vehicle_id' => Vehicle::factory(),
         ];
     }
 }

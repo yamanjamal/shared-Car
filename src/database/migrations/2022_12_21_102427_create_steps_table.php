@@ -12,6 +12,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('long');
             $table->string('lat');
+            $table->foreignUuid('trip_id')->constrained('trips')->cascadeOnDelete();
             $table->timestamps();
         });
     }

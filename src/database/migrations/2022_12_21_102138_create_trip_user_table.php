@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('tripuser', function (Blueprint $table) {
+        Schema::create('trip_user', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained('users');
-            $table->foreignUuid('trip_id')->constrained('trips');
+            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignUuid('trip_id')->constrained('trips')->cascadeOnDelete();
             $table->double('price');
             $table->timestamps();
         });
