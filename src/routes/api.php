@@ -2,23 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\TokenAuthController;
+use \App\Http\Controllers\StepController;
+use \App\Http\Controllers\TripController;
+use \App\Http\Controllers\VehicleController;
+use \App\Http\Controllers\UserController;
 
-//
-//Route::middleware('guest')->group(function () {
-//        $limiter = config('fortify.limiters.login');
-//
-//    Route::post('/auth/token', [TokenAuthController::class, 'store'])
-//        ->middleware(array_filter([$limiter ? 'throttle:' . $limiter : null]));
-//});
-
-Route::post('/login', [TokenAuthController::class, 'store']);
+//Mobile Registration
+Route::post('/auth/token', [TokenAuthController::class, 'store'])->middleware('guest');
+Route::delete('/auth/token', [TokenAuthController::class, 'destroy'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::delete('/auth/token', [TokenAuthController::class, 'destroy']);
-    Route::apiResource('steps', \App\Http\Controllers\StepController::class);
-    Route::apiResource('trips', \App\Http\Controllers\TripController::class);
-    Route::apiResource('vehicles', \App\Http\Controllers\VehicleController::class);
-    Route::apiResource('users', \App\Http\Controllers\UserController::class)->only(['index', 'show']);
+    Route::apiResource('steps', StepController::class);
+    Route::apiResource('trips', TripController::class);
+    Route::apiResource('vehicles', VehicleController::class);
+    Route::apiResource('users', UserController::class)->only(['index', 'show']);
 });
-//
-//
