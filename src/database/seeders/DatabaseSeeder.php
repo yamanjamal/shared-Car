@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             VehicleSeeder::class,
             TripSeeder::class,
             StepSeeder::class,
+            PermissionsSeeder::class,
         ]);
     }
 }
