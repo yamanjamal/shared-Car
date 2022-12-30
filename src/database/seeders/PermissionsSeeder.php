@@ -17,8 +17,39 @@ class PermissionsSeeder extends Seeder
 
         $Admin = Role::create(['name' => 'Admin']);
         $this->SettingUpPermissions();
-        $this->CreateUserPermissions();
-        $this->CreateDriverPermissions();
+        $UserPermissions = [
+            'role_access',
+            'role_show',
+            'role_create',
+            'role_edit',
+            'role_delete',
+        ];
+        $this->CreateNewRole('User', $UserPermissions);
+
+        $DriverPermissions = [
+            'role_access',
+            'role_show',
+            'role_create',
+            'role_edit',
+            'role_delete',
+        ];
+        $this->CreateNewRole('Driver', $DriverPermissions);
+    }
+
+    public function CreateNewRole($roleName , $Permissions):void
+    {
+        $role = Role::create(['name' => $roleName]);
+
+        foreach ($Permissions as $permission) {
+            $role->givePermissionTo($permission);
+        }
+
+        $user = User::factory()->create([
+            'name' => 'Example Admin User',
+            'email' => $roleName . '@example.com',
+        ]);
+
+        $user->assignRole($role);
     }
 
     public function SettingUpPermissions():void
@@ -46,45 +77,5 @@ class PermissionsSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
-    }
-
-    public function CreateUserPermissions():void
-    {
-        $Permissions = [
-            'permission_access',
-        ];
-
-        $User = Role::create(['name' => 'User']);
-
-        foreach ($Permissions as $permission) {
-            $User->givePermissionTo($permission);
-        }
-
-        $user = User::factory()->create([
-            'name' => 'Example Admin User',
-            'email' => 'admin2@example.com',
-        ]);
-
-        $user->assignRole($User);
-    }
-
-    public function CreateDriverPermissions():void
-    {
-        $Permissions = [
-            'permission_access',
-        ];
-
-        $Driver = Role::create(['name' => 'Driver']);
-
-        foreach ($Permissions as $permission) {
-            $Driver->givePermissionTo($permission);
-        }
-
-        $user = User::factory()->create([
-            'name' => 'Example Admin User',
-            'email' => 'admin1@example.com',
-        ]);
-
-        $user->assignRole($Driver);
     }
 }
