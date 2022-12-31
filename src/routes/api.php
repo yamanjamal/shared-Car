@@ -21,8 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [ProfileController::class, 'info']);
 
     //Roles
-//    Route::post('roles/grant',              [RoleController::class  ,  'grant']);
-//    Route::post('roles/revoke',             [RoleController::class    , 'revoke']);
+    Route::post('roles/grant', [RoleController::class, 'grant']);
+    Route::post('roles/revoke', [RoleController::class, 'revoke']);
     Route::apiresource('roles',             RoleController::class);
 
     //Permissions

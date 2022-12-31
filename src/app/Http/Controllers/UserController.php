@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function show(User $user): UserResource
     {
-        return new UserResource(resource: $user);
+        return new UserResource(resource: $user->load('roles.permissions'));
     }
 
     public function count()
