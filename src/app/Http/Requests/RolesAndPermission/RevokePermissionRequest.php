@@ -3,7 +3,7 @@
 namespace App\Http\Requests\RolesAndPermission;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 
 class RevokePermissionRequest extends FormRequest
 {
@@ -16,7 +16,6 @@ class RevokePermissionRequest extends FormRequest
 
     public function authorize():bool
     {
-        abort_if(Gate::denies('permission_revoke'),403);
-        return true;
+        return Gate::allows('permission_revoke');
     }
 }

@@ -8,6 +8,7 @@ use \App\Http\Controllers\VehicleController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\ProfileController;
 use \App\Http\Controllers\RoleController;
+use \App\Http\Controllers\PermissionController;
 
 //Mobile Registration
 Route::post('/auth/token', [TokenAuthController::class, 'store'])->middleware('guest');
@@ -26,14 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiresource('roles',             RoleController::class);
 
     //Permissions
-    //Route::post('permissions/grant/{role}', [PermissionController::class,    'grant']);
-    //Route::post('permissions/revoke/{role}',[PermissionController::class,    'revoke']);
-    //Route::apiresource('permissions',        PermissionController::class)->except('update','store','destroy');
+    Route::post('permissions/grant/{role}', [PermissionController::class, 'grant']);
+    Route::post('permissions/revoke/{role}', [PermissionController::class, 'revoke']);
+    Route::apiresource('permissions',        PermissionController::class)->except('update','store','destroy');
 });
-
-//new
-//// +++++++++++++++++++++++++++++++start Role api+++++++++++++++++++++++++++++++++++
-//// +++++++++++++++++++++++++++++++end Role api+++++++++++++++++++++++++++++++++++++
-//
-//// +++++++++++++++++++++++++++++++start Permission api+++++++++++++++++++++++++++++
-//// +++++++++++++++++++++++++++++++end Permission api+++++++++++++++++++++++++++++++

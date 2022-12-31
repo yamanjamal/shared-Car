@@ -3,7 +3,7 @@
 namespace App\Http\Requests\RolesAndPermission;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 
 class GrantPermissionRequest extends FormRequest
 {
@@ -16,9 +16,6 @@ class GrantPermissionRequest extends FormRequest
 
     public function authorize():bool
     {
-        abort_if(Gate::denies('permission_grant'),403);
-        return true;
+        return Gate::allows('permission_grant');
     }
-
-
 }

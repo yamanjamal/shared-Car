@@ -25,6 +25,11 @@ class PermissionsSeeder extends Seeder
             'role_delete',
             'role_grant',
             'role_revoke',
+
+            'permission_access',
+            'permission_show',
+            'permission_grant',
+            'permission_revoke',
         ];
         $this->CreateNewRole('User', $UserPermissions);
 
@@ -36,6 +41,11 @@ class PermissionsSeeder extends Seeder
             'role_delete',
             'role_grant',
             'role_revoke',
+
+            'permission_access',
+            'permission_show',
+            'permission_grant',
+            'permission_revoke',
         ];
         $this->CreateNewRole('Driver', $DriverPermissions);
     }
@@ -69,9 +79,8 @@ class PermissionsSeeder extends Seeder
 
             'permission_access',
             'permission_show',
-            'permission_create',
-            'permission_edit',
-            'permission_delete',
+            'permission_grant',
+            'permission_revoke',
 
             'user_access',
             'user_show',
