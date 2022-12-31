@@ -21,6 +21,8 @@ class UserResource extends JsonResource
             'full_name' => $this->whenNotNull($this->full_name),
             'trips' => TripResource::collection($this->whenLoaded('trips')),
             'vehicle' => new VehicleResource($this->whenLoaded('vehicle')),
+            'roles' => RoleResource::collection($this->whenLoaded('roles')),
+            'permissions' => PermissionResource::collection($this->whenLoaded('permissions')),
         ];
     }
 }
