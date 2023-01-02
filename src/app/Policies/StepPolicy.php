@@ -5,90 +5,45 @@ namespace App\Policies;
 use App\Models\Step;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 class StepPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
+    public function viewAny(User $user):Response|bool
     {
-        //
+        return Gate::allows('step_access');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Step  $step
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(User $user, Step $step)
+    public function view(User $user, Step $step):Response|bool
     {
-        //
+        return Gate::allows('step_show');
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(User $user)
+    public function create(User $user):Response|bool
     {
-        //
+        return Gate::allows('step_create');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Step  $step
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function update(User $user, Step $step)
+    public function update(User $user, Step $step):Response|bool
     {
-        //
+        return Gate::allows('step_edit');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Step  $step
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(User $user, Step $step)
+    public function delete(User $user, Step $step):Response|bool
     {
-        //
+        return Gate::allows('step_delete');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Step  $step
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Step $step)
+    public function restore(User $user, Step $step):Response|bool
     {
-        //
+        return Gate::allows('step_restore');
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Step  $step
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Step $step)
+    public function forceDelete(User $user, Step $step):Response|bool
     {
-        //
+        return Gate::allows('step_forceDelete');
     }
 }

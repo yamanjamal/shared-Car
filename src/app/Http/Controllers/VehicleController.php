@@ -12,6 +12,11 @@ use Illuminate\Http\Response;
 
 class VehicleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Vehicle::class, 'vehicle');
+    }
+
     public function index(Request $request)
     {
         $trip = VehiclePipeline::make(

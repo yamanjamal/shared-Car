@@ -12,6 +12,11 @@ use Illuminate\Http\Response;
 
 class TripController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Trip::class, 'trip');
+    }
+
     public function index(Request $request)
     {
         $trip = TripPipeline::make(

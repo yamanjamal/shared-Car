@@ -30,6 +30,24 @@ class PermissionsSeeder extends Seeder
             'permission_show',
             'permission_grant',
             'permission_revoke',
+
+            'trip_access',
+            'trip_show',
+            'trip_create',
+            'trip_edit',
+            'trip_delete',
+
+            'vehicle_access',
+            'vehicle_show',
+            'vehicle_create',
+            'vehicle_edit',
+            'vehicle_delete',
+
+            'step_access',
+            'step_show',
+            'step_create',
+            'step_edit',
+            'step_delete',
         ];
         $this->CreateNewRole('User', $UserPermissions);
 
@@ -68,6 +86,7 @@ class PermissionsSeeder extends Seeder
 
     public function SettingUpPermissions():void
     {
+
         $permissions = [
             'role_access',
             'role_show',
@@ -87,6 +106,24 @@ class PermissionsSeeder extends Seeder
             'user_create',
             'user_edit',
             'user_delete',
+
+            'trip_access',
+            'trip_show',
+            'trip_create',
+            'trip_edit',
+            'trip_delete',
+
+            'vehicle_access',
+            'vehicle_show',
+            'vehicle_create',
+            'vehicle_edit',
+            'vehicle_delete',
+
+            'step_access',
+            'step_show',
+            'step_create',
+            'step_edit',
+            'step_delete',
         ];
 
         foreach ($permissions as $permission) {

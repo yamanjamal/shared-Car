@@ -12,6 +12,11 @@ use Illuminate\Http\Response;
 
 class StepController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Step::class, 'step');
+    }
+
     public function index(Request $request): StepResource
     {
         $steps = Step::paginate($request->get('page', 10));
