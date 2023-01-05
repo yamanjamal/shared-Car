@@ -22,15 +22,15 @@ class TripController extends Controller
         $trip = TripPipeline::make(
             builder: Trip::query(),
             request: $request,
-        )->paginate($request->get('page', 10));
+        )->paginate($request->get('limit', 10));
 
         return TripResource::collection($trip);
     }
 
     public function store(StoreTripRequest $request)
     {
-        $game = Trip::create($request->validated());
-        return response()->json(new TripResource($game),201);
+        $trip = Trip::create($request->validated());
+        return response()->json(new TripResource($trip),201);
     }
 
     public function show(Trip $trip):TripResource

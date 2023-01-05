@@ -22,7 +22,7 @@ class VehicleController extends Controller
         $trip = VehiclePipeline::make(
             builder: Vehicle::query(),
             request: $request,
-        )->paginate($request->get('page', 10));
+        )->paginate($request->get('limit', 10));
 
         return VehicleResource::collection($trip);
     }

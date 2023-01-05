@@ -29,6 +29,12 @@ Route::middleware('auth:sanctum')->group(function () {
     //Permissions
     //TODO:grant and revoke dont work on insomnia for permissions
     //TODO:for vehicle validation need to make custom rule if the user own the car or not
+    //TODO:authorization for user controller
+    //TODO:test all the pagination and the filters and sorts
+    //TODO:do unit test
+    //TODO:notifications and web sockets and channels should be made
+    //TODO:builders should be made
+    //TODO:integrate with soketi
     Route::post('permissions/grant/{role}', [PermissionController::class, 'grant']);
     Route::post('permissions/revoke/{role}', [PermissionController::class, 'revoke']);
     Route::apiresource('permissions', PermissionController::class)->except('update','store','destroy');

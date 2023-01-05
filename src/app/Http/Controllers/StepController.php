@@ -17,9 +17,9 @@ class StepController extends Controller
         $this->authorizeResource(Step::class, 'step');
     }
 
-    public function index(Request $request): StepResource
+    public function index(Request $request)
     {
-        $steps = Step::paginate($request->get('page', 10));
+        $steps = Step::paginate($request->get('limit', 10));
 
         return StepResource::collection($steps);
     }

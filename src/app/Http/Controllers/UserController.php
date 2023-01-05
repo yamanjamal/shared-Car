@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::paginate($request->get('page', 10));
+        $users = User::paginate($request->get('limit', 10));
         return UserResource::collection($users);
     }
 
