@@ -12,12 +12,17 @@ use Illuminate\Http\Response;
 
 class VehicleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Vehicle::class, 'vehicle');
+    }
+
     public function index(Request $request)
     {
         $trip = VehiclePipeline::make(
             builder: Vehicle::query(),
             request: $request,
-        )->paginate($request->get('page', 10));
+        )->paginate($request->get('limit', 10));
 
         return VehicleResource::collection($trip);
     }
